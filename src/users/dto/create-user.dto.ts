@@ -26,7 +26,7 @@ export class CreateUserDto {
   @ApiProperty({
     description:
       'User password. Must contain at least 2 lowercase, 2 uppercase, 2 digits, and 2 special characters.',
-    example: 'Aa12@@bb',
+    example: 'AA12@@bb',
   })
   @IsNotEmpty()
   @MinLength(8)
@@ -38,8 +38,12 @@ export class CreateUserDto {
 
   @ApiPropertyOptional({
     description: 'User phone number',
-    example: '+1234567890',
+    example: '+1234567893',
   })
   @IsOptional()
+  @Matches(/^\+(\d{1,3})\d{9,14}$/, {
+    message:
+      'Phone number must start with "+" followed by the country code and have a valid national number (e.g., +380123456789 or +33123456789)',
+  })
   phoneNumber?: string;
 }

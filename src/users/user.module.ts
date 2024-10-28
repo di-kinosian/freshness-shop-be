@@ -10,8 +10,9 @@ import { UserController } from './user.controller';
   ],
   controllers: [UserController],
   providers: [UserService],
-  exports: [UserService],
+  exports: [],
 })
+
 export class UserModule {
   constructor() {
     console.log('UserModule initialized');
