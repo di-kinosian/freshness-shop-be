@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const PORT = 3000;
 const HOST = '127.0.0.1';
@@ -11,4 +14,5 @@ async function bootstrap() {
     console.log(`Server started on port ${PORT}`);
   });
 }
+
 bootstrap();
