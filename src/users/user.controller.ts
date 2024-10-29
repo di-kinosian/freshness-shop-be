@@ -24,4 +24,16 @@ export class UserController {
   ): Promise<{ user: User; accessToken: string }> {
     return this.userService.createUser(createUserDto);
   }
+
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-auth')
+  @Get('profile')
+  getProfile(@Request() req) {
+    return {
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      phoneNumber: req.user.phoneNumber,
+    };
+  }
 }
