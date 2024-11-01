@@ -36,3 +36,7 @@ export const ApiResponses = {
 export const JwtConstants = {
   EXPIRES_IN: '2h',
 };
+
+export const SummaryConstants = {
+  USER_REGISTRATION: 'User registration',
+};
