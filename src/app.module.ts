@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { config } from 'dotenv';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
+
 config();
 @Module({
   imports: [

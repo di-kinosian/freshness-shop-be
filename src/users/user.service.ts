@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
-import { Messages } from 'src/main/constants/api.constants';
+import { ErrorMessages } from 'src/main/constants/messages.constants';
 
 @Injectable()
 export class UserService {
@@ -22,10 +22,10 @@ export class UserService {
     createUserDto: CreateUserDto,
   ): Promise<{ user: User; accessToken: string }> {
     const { email, password } = createUserDto;
-
     const existingUser = await this.userModel.findOne({ email });
+
     if (existingUser) {
-      throw new BadRequestException(Messages.EMAIL_ALREADY_IN_USE);
+      throw new BadRequestException(ErrorMessages.EMAIL_ALREADY_IN_USE);
     }
 
     const salt = await bcrypt.genSalt();
@@ -46,17 +46,21 @@ export class UserService {
 
   async findByEmail(email: string): Promise<User | null> {
     const user = await this.userModel.findOne({ email }).exec();
+
     if (!user) {
-      throw new NotFoundException(`User with email ${email} not found`);
+      throw new NotFoundException(ErrorMessages.USER_EMAIL_NOT_FOUND);
     }
+
     return user;
   }
 
   async findById(userId: string): Promise<User | null> {
     const user = await this.userModel.findById(userId).exec();
+
     if (!user) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
+      throw new NotFoundException(ErrorMessages.USER_ID_NOT_FOUND);
     }
+
     return user;
   }
 }

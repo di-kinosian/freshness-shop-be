@@ -1,7 +1,8 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from '../users/user.service';
-import { LoginUserDto } from './dto/login-user.dto'; 
+import { LoginUserDto } from './dto/login-user.dto';
+import { ErrorMessages } from 'src/main/constants/messages.constants';
 
 @Controller('auth')
 export class AuthController {
@@ -17,7 +18,7 @@ export class AuthController {
       loginDto.password,
     );
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException(ErrorMessages.INVALID_EMAIL);
     }
     return this.authService.login(user);
   }

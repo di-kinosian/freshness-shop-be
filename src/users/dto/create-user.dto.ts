@@ -6,7 +6,7 @@ import {
   IsOptional,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { apiProperties } from 'src/main/constants/api.constants';
+import { UserProperties } from 'src/main/constants/api.constants';
 import {
   emailValidation,
   firstNameValidation,
@@ -17,19 +17,19 @@ import {
 import { validationMessages } from 'src/main/constants/messages.constants';
 
 export class CreateUserDto {
-  @ApiProperty(apiProperties.firstName)
-  @IsNotEmpty({message: firstNameValidation.message})
+  @ApiProperty(UserProperties.firstName)
+  @IsNotEmpty({ message: firstNameValidation.message })
   firstName: string;
 
-  @ApiProperty(apiProperties.lastName)
-  @IsNotEmpty({message: lastNameValidation.message})
+  @ApiProperty(UserProperties.lastName)
+  @IsNotEmpty({ message: lastNameValidation.message })
   lastName: string;
 
-  @ApiProperty(apiProperties.email)
+  @ApiProperty(UserProperties.email)
   @IsEmail({}, { message: emailValidation.message })
   email: string;
 
-  @ApiProperty(apiProperties.password)
+  @ApiProperty(UserProperties.password)
   @IsNotEmpty()
   @MinLength(passwordValidation.minLength)
   @Matches(passwordValidation.regex, {
@@ -37,7 +37,7 @@ export class CreateUserDto {
   })
   password: string;
 
-  @ApiPropertyOptional(apiProperties.phoneNumber)
+  @ApiPropertyOptional(UserProperties.phoneNumber)
   @IsOptional()
   @Matches(phoneNumberValidation.regex, {
     message: validationMessages.phoneNumberFormat,
