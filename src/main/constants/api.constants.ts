@@ -1,14 +1,14 @@
-export const apiProperties = {
+export const UserProperties = {
   firstName: {
-    description: 'User first name',
+    description: 'First name',
     example: 'John',
   },
   lastName: {
-    description: 'User last name',
+    description: 'Last name',
     example: 'Doe',
   },
   email: {
-    description: 'User email address',
+    description: 'User email',
     example: 'john.doe@example.com',
   },
   password: {
@@ -17,7 +17,7 @@ export const apiProperties = {
     example: 'AA12@@bb',
   },
   phoneNumber: {
-    description: 'User phone number',
+    description: 'Phone number',
     example: '+1234567893',
   },
 };
@@ -33,7 +33,6 @@ export const ApiResponses = {
   },
 };
 
-export const Messages = {
-  HELLO_WORLD: 'Hello World!',
-  EMAIL_ALREADY_IN_USE: 'Email already in use',
+export const JwtConstants = {
+  EXPIRES_IN: '2h',
 };

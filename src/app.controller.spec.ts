@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Messages } from './main/constants/api.constants';
+import { Messages } from './main/constants/messages.constants';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -16,7 +16,7 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it(Messages.SHOULD_RETURN_HELLO_WORLD, () => {
       expect(appController.getHello()).toBe(Messages.HELLO_WORLD);
     });
   });
