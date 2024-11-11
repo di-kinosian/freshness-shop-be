@@ -76,4 +76,13 @@ export class UserService {
   async findByRefreshToken(refreshToken: string): Promise<User | null> {
     return this.userModel.findOne({ refreshToken }).exec();
   }
+
+  async removeRefreshToken(userId: string) {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
+    }
+    user.refreshToken = '';
+    await user.save();
+  }
 }

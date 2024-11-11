@@ -24,7 +24,7 @@ export const UserProperties = {
 
 export const RefreshTokenProperties = {
   refreshToken: {
-    description: ' Refresh token',
+    description: 'Refresh token',
     example: 'your_refresh_token',
   },
 };

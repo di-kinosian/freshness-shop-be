@@ -1,8 +1,14 @@
-import { Controller, Post, Body, UnauthorizedException, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from '../users/user.service';
 import { LoginUserDto } from './dto/login-user.dto';
-import { ErrorMessages } from 'src/main/constants/messages.constants';
+import { ErrorMessages, Messages } from 'src/main/constants/messages.constants';
 import { JwtService } from '@nestjs/jwt';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -35,13 +41,15 @@ export class AuthController {
     const { refreshToken } = refreshTokenDto;
 
     if (!refreshToken) {
-      throw new UnauthorizedException(ErrorMessages.REFRESH_TOKEN_IS_NOT_PROVIDED);
+      throw new UnauthorizedException(
+        ErrorMessages.REFRESH_TOKEN_IS_NOT_PROVIDED,
+      );
     }
 
     const user = await this.userService.findByRefreshToken(refreshToken);
-    
+
     if (!user) {
-      throw new UnauthorizedException(ErrorMessages.REFRESH_TOKEN_IS_iNVALID);
+      throw new UnauthorizedException(ErrorMessages.REFRESH_TOKEN_IS_INVALID);
     }
 
     const newAccessToken = this.jwtService.sign({
@@ -50,5 +58,26 @@ export class AuthController {
     });
 
     return { accessToken: newAccessToken };
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-auth')
+  @Post('logout')
+  async logout(@Body() refreshTokenDto: RefreshTokenDto) {
+    const { refreshToken } = refreshTokenDto;
+
+    if (!refreshToken) {
+      throw new UnauthorizedException(
+        ErrorMessages.REFRESH_TOKEN_IS_NOT_PROVIDED,
+      );
+    }
+
+    const user = await this.userService.findByRefreshToken(refreshToken);
+    if (!user) {
+      throw new UnauthorizedException(ErrorMessages.REFRESH_TOKEN_IS_INVALID);
+    }
+
+    await this.userService.updateRefreshToken(user._id, '');
+    return { message: Messages.LOGOUT_SUCCESSFULLY };
   }
 }
