@@ -22,6 +22,13 @@ export const UserProperties = {
   },
 };
 
+export const RefreshTokenProperties = {
+  refreshToken: {
+    description: ' Refresh token',
+    example: 'your_refresh_token',
+  },
+};
+
 export const ApiDescriptions = {
   GET_HELLO: 'Retrieve a greeting message from the server.',
 };
@@ -34,7 +41,8 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN: '2h',
+  EXPIRES_IN_ACCESS: '30m',
+  EXPIRES_IN_REFRESH: '7d',
 };
 
 export const SummaryConstants = {
