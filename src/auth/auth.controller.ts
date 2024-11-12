@@ -73,11 +73,13 @@ export class AuthController {
     }
 
     const user = await this.userService.findByRefreshToken(refreshToken);
+
     if (!user) {
       throw new UnauthorizedException(ErrorMessages.REFRESH_TOKEN_IS_INVALID);
     }
 
     await this.userService.updateRefreshToken(user._id, '');
+
     return { message: Messages.LOGOUT_SUCCESSFULLY };
   }
 }

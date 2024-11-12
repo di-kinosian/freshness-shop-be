@@ -40,9 +40,8 @@ export class AuthService {
 
   async login(user: User) {
     const accessToken = await this.generateAccessToken(user);
-
     const refreshToken = await this.generateRefreshToken(user);
-
+    
     await this.userService.updateRefreshToken(user._id, refreshToken);
 
     return {

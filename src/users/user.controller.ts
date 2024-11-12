@@ -22,7 +22,7 @@ export class UserController {
   @ApiOperation({ summary: SummaryConstants.USER_REGISTRATION })
   async signUp(
     @Body() createUserDto: CreateUserDto,
-  ): Promise<{ user: User; accessToken: string }> {
+  ): Promise<{ user: User }> {
     return this.userService.createUser(createUserDto);
   }
 

@@ -18,9 +18,7 @@ export class UserService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async createUser(
-    createUserDto: CreateUserDto,
-  ): Promise<{ user: User; accessToken: string }> {
+  async createUser(createUserDto: CreateUserDto): Promise<{ user: User }> {
     const { email, password } = createUserDto;
     const existingUser = await this.userModel.findOne({ email });
 
@@ -38,10 +36,7 @@ export class UserService {
 
     await user.save();
 
-    const payload = { email: user.email, sub: user._id };
-    const accessToken = this.jwtService.sign(payload);
-
-    return { user, accessToken };
+    return { user };
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -64,7 +59,10 @@ export class UserService {
     return user;
   }
 
-  async updateRefreshToken(userId: string, refreshToken: string) {
+  async updateRefreshToken(
+    userId: string,
+    refreshToken: string,
+  ): Promise<void> {
     const user = await this.userModel.findById(userId);
     if (!user) {
       throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
@@ -77,7 +75,7 @@ export class UserService {
     return this.userModel.findOne({ refreshToken }).exec();
   }
 
-  async removeRefreshToken(userId: string) {
+  async removeRefreshToken(userId: string): Promise<void> {
     const user = await this.userModel.findById(userId);
     if (!user) {
       throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
