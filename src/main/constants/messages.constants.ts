@@ -8,7 +8,9 @@ export const validationMessages = {
 export const Messages = {
   HELLO_WORLD: 'Hello World!',
   USERMODULE_INITIALIZED: 'UserModule initialized',
-  SHOULD_RETURN_HELLO_WORLD: 'should return "Hello World!"',
+  SHOULD_RETURN_HELLO_WORLD: 'should return "Hello World!',
+  TOKEN_IS_EXPIRED: 'Token is expired',
+  LOGOUT_SUCCESSFULLY: 'Logged out successfully'
 };
 
 export const ErrorMessages = {
@@ -16,4 +18,7 @@ export const ErrorMessages = {
   EMAIL_ALREADY_IN_USE: 'Email already in use',
   USER_EMAIL_NOT_FOUND: 'User with email {email} not found',
   USER_ID_NOT_FOUND: 'User with ID {userId} not found',
+  USER_NOT_FOUND: 'User not found',
+  REFRESH_TOKEN_IS_NOT_PROVIDED: 'Refresh token is not provided',
+  REFRESH_TOKEN_IS_INVALID: 'Invalid refresh token',
 };

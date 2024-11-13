@@ -11,8 +11,8 @@ import { JwtConstants } from 'src/main/constants/api.constants';
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'yourSecretKey',
-      signOptions: { expiresIn: JwtConstants.EXPIRES_IN },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: JwtConstants.EXPIRES_IN_ACCESS },
     }),
   ],
   controllers: [UserController],

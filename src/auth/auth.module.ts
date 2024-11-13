@@ -15,10 +15,11 @@ import { JwtConstants } from 'src/main/constants/api.constants';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: JwtConstants.EXPIRES_IN },
+      signOptions: { expiresIn: JwtConstants.EXPIRES_IN_ACCESS },
     }),
   ],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
 })
+
 export class AuthModule {}
