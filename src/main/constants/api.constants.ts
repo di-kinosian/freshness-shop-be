@@ -22,6 +22,11 @@ export const UserProperties = {
   },
 };
 
+export const DateForPadination = {
+  page: 1,
+  limit: 5,
+};
+
 export const RefreshTokenProperties = {
   refreshToken: {
     description: 'Refresh token',
