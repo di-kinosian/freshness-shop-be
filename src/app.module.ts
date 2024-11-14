@@ -6,6 +6,7 @@ import { config } from 'dotenv';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 
 config();
 @Module({
@@ -14,6 +15,7 @@ config();
     UserModule,
     MongooseModule.forRoot(process.env.MONGO_DB_URI),
     ProductModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

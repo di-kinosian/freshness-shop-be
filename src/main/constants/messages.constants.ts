@@ -11,7 +11,8 @@ export const Messages = {
   SHOULD_RETURN_HELLO_WORLD: 'should return "Hello World!',
   TOKEN_IS_EXPIRED: 'Token is expired',
   LOGOUT_SUCCESSFULLY: 'Logged out successfully',
-  SEEDING_COMPLETE: 'Seeding complete',
+  CATEGORY_DELETED_SUCCESSFULLY: 'Category was deleted successfuly',
+  SUBCATEGORY_DELETED_SUCCESS: 'SubCategory was deleted successfuly',
 };
 
 export const ErrorMessages = {
@@ -22,5 +23,8 @@ export const ErrorMessages = {
   USER_NOT_FOUND: 'User not found',
   REFRESH_TOKEN_IS_NOT_PROVIDED: 'Refresh token is not provided',
   REFRESH_TOKEN_IS_INVALID: 'Invalid refresh token',
-  SEEDING_FAILED: 'Seeding failed',
+  CATEGORY_NOT_FOUND: 'Category is not found',
+  FAILED_TO_CREATE_SUBCATEGORY: 'Failed to create subcategory',
+  CATEGORY_WITH_ID_NOT_FOUND: (id) => `Category with ${id} id not defined`,
+  SUBCATEGORY_WITH_ID_NOT_FOUND: (id) => `Subcategory with id ${id} not found`,
 };
