@@ -11,8 +11,7 @@ export const Messages = {
   SHOULD_RETURN_HELLO_WORLD: 'should return "Hello World!',
   TOKEN_IS_EXPIRED: 'Token is expired',
   LOGOUT_SUCCESSFULLY: 'Logged out successfully',
-  CATEGORY_DELETED_SUCCESSFULLY: 'Category was deleted successfuly',
-  SUBCATEGORY_DELETED_SUCCESS: 'SubCategory was deleted successfuly',
+  DELETED_SUCCESSFULLY: (item: string) => `${item} was deleted successfuly`,
 };
 
 export const ErrorMessages = {
@@ -25,6 +24,8 @@ export const ErrorMessages = {
   REFRESH_TOKEN_IS_INVALID: 'Invalid refresh token',
   CATEGORY_NOT_FOUND: 'Category is not found',
   FAILED_TO_CREATE_SUBCATEGORY: 'Failed to create subcategory',
-  CATEGORY_WITH_ID_NOT_FOUND: (id) => `Category with ${id} id not defined`,
-  SUBCATEGORY_WITH_ID_NOT_FOUND: (id) => `Subcategory with id ${id} not found`,
+  CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
+    `Category with ${id} id not defined`,
+  SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
+    `Subcategory with id ${id} not found`,
 };
