@@ -26,11 +26,7 @@ export class CategoryController {
 
   @Post()
   async createCategory(@Body() createCategoryDto: CreateCategoryDto) {
-    const createdCategory = await this.categoryService.createCategory(
-      createCategoryDto.name,
-    );
-
-    return createdCategory;
+    return await this.categoryService.createCategory(createCategoryDto.name);
   }
 
   @Put(':id')
@@ -38,19 +34,17 @@ export class CategoryController {
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    const updatedCategory = await this.categoryService.updateCategory(
+    return await this.categoryService.updateCategory(
       id,
       updateCategoryDto.name,
     );
-
-    return updatedCategory;
   }
 
   @Delete(':id')
   async deleteCategory(@Param('id') id: string) {
     await this.categoryService.deleteCategory(id);
 
-    return { message: Messages.CATEGORY_DELETED_SUCCESSFULLY };
+    return { message: Messages.DELETED_SUCCESSFULLY('Category') };
   }
 
   @Post(':id/subcategory')
@@ -60,9 +54,10 @@ export class CategoryController {
     @Param('id') categoryId: string,
     @Body() createSubCategoryDto: CreateSubCategoryDto,
   ) {
-    const { name } = createSubCategoryDto;
-
-    return this.categoryService.createSubCategory(categoryId, name);
+    return this.categoryService.createSubCategory(
+      categoryId,
+      createSubCategoryDto.name,
+    );
   }
 
   @Delete(':id/subcategory/:subCategoryId')
@@ -73,7 +68,7 @@ export class CategoryController {
     try {
       await this.categoryService.deleteSubCategory(id, subCategoryId);
 
-      return { message: Messages.SUBCATEGORY_DELETED_SUCCESS };
+      return { message: Messages.DELETED_SUCCESSFULLY('Subcategory') };
     } catch (error) {
       throw new NotFoundException(error.message);
     }

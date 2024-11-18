@@ -9,7 +9,6 @@ async function seed() {
 
   try {
     await productSeed.seed();
-  } catch (error) {
   } finally {
     await app.close();
   }
