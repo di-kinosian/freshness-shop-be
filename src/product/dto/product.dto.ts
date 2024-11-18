@@ -1,25 +1,4 @@
-import { Schema, Document } from 'mongoose';
-
-export interface AdditionalInformation {
-  key: string;
-  value: string | number;
-}
-
-export interface Product extends Document {
-  _id: string;
-  title: string;
-  description: string;
-  rating?: number;
-  price: number;
-  quantity: number;
-  brand: string;
-  country: string;
-  images: string[];
-  discount?: number;
-  categoryId: string;
-  subcategoryId: string;
-  additionalInformation?: AdditionalInformation[];
-}
+import { Schema } from 'mongoose';
 
 export const ProductSchema = new Schema({
   title: { type: String, required: true },

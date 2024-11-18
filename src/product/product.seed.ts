@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Product } from './dto/product.dto';
+import { Product } from './product.types';
 
 @Injectable()
 export class ProductSeed {
@@ -21,7 +21,7 @@ export class ProductSeed {
         country: 'USA',
         images: ['image1.jpg', 'image2.jpg'],
         discount: 10,
-        categoryId: '634f1ad02860e54333b9b0a1',
+        categoryId: '67362dabcd487232b2f86e38',
         subcategoryId: '634f1ad02860e54333b9b0a2',
         additionalInformation: [
           { key: 'color', value: 'black' },
@@ -36,7 +36,7 @@ export class ProductSeed {
         brand: 'LaptopBrand',
         country: 'Germany',
         images: ['laptop1.jpg', 'laptop2.jpg'],
-        categoryId: '634f1ad02860e54333b9b0a3',
+        categoryId: '67362ee7cd487232b2f86e5a',
         subcategoryId: '634f1ad02860e54333b9b0a4',
         additionalInformation: [
           { key: 'processor', value: 'Intel i7' },
@@ -46,6 +46,5 @@ export class ProductSeed {
     ];
 
     await this.productModel.insertMany(sampleProducts);
-    console.log('Sample products have been added to the database.');
   }
 }

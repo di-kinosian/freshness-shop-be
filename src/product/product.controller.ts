@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { Product } from './dto/product.dto';
 import { ProductService } from './product.service';
 import { DataForPadination } from 'src/main/constants/api.constants';
+import { Filter, Product } from './product.types';
 
 @Controller('products')
 export class ProductController {
@@ -13,5 +13,10 @@ export class ProductController {
     @Query('limit') limit: number = DataForPadination.limit,
   ): Promise<{ items: Product[]; total: number; page: number }> {
     return this.productService.getAllProducts(page, limit);
+  }
+
+  @Get('filters')
+  async getFilters(): Promise<Filter> {
+    return this.productService.getFilters();
   }
 }
