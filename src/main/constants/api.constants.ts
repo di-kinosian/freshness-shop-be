@@ -22,7 +22,7 @@ export const UserProperties = {
   },
 };
 
-export const DateForPadination = {
+export const DataForPadination = {
   page: 1,
   limit: 5,
 };

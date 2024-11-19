@@ -7,16 +7,17 @@ import { ValidationPipe } from '@nestjs/common';
 
 dotenv.config();
 
-const PORT = 3000;
+const PORT = 8080;
 const HOST = '127.0.0.1';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:5173',
-    methods: 'GET,POST,PUT,DELETE',
+    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   app.useGlobalPipes(
