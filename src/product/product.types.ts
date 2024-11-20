@@ -1,4 +1,4 @@
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 export interface AdditionalInformation {
   key: string;
@@ -34,4 +34,14 @@ export interface Filter {
     min: number;
     max: number;
   };
+}
+
+export interface SelectedFilters {
+  // category: string;
+  brands: string[];
+  price: {
+    min: number;
+    max: number;
+  };
+  rating: number[];
 }

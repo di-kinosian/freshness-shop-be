@@ -1,19 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Category } from 'src/category/shemas/category.shema';
-import { Filter, Product } from './product.types';
+import { Filter, Product, SelectedFilters } from './product.types';
 
 @Injectable()
 export class ProductService {
   constructor(@InjectModel('Product') private productModel: Model<Product>) {}
 
-  async getAllProducts(page: number, limit: number) {
+  async getAllProducts(page: number, limit: number, filters: SelectedFilters) {
     const skip = (page - 1) * limit;
 
+    const query: any = {};
+
+    // if (filters.category) {
+    //   query.category = filters.category;
+    // }
+
+    if (filters.brands.length) {
+      query.brand = { $in: filters.brands };
+    }
+
+    if (filters.price.min !== 0 || filters.price.max !== Infinity) {
+      query.price = {
+        ...(filters.price.min !== 0 && { $gte: filters.price.min }),
+        ...(filters.price.max !== Infinity && { $lte: filters.price.max }),
+      };
+    }
+
+    if (filters.rating.length) {
+      query.rating = { $in: filters.rating };
+    }
+
     const [items, total] = await Promise.all([
-      this.productModel.find().skip(skip).limit(limit).exec(),
-      this.productModel.countDocuments().exec(),
+      this.productModel.find(query).skip(skip).limit(limit).exec(),
+      this.productModel.countDocuments(query).exec(),
     ]);
 
     return { items, total, page };

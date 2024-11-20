@@ -16,5 +16,4 @@ import { Category, CategorySchema } from 'src/category/shemas/category.shema';
   providers: [ProductService, ProductSeed],
   controllers: [ProductController],
 })
-
 export class ProductModule {}
