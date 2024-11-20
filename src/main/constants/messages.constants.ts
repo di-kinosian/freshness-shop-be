@@ -28,4 +28,5 @@ export const ErrorMessages = {
     `Category with ${id} id not defined`,
   SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Subcategory with id ${id} not found`,
+  PRODUCT_WITH_ID_NOT_FOUND: (id: string) => `Product with ID ${id} not found`,
 };

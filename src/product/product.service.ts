@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Filter, Product, SelectedFilters } from './product.types';
+import { ProductDto } from './dto/product.dto';
 
 @Injectable()
 export class ProductService {
@@ -37,6 +38,14 @@ export class ProductService {
     ]);
 
     return { items, total, page };
+  }
+
+  async getProductById(id: ProductDto): Promise<Product> {
+    return this.productModel
+      .findById(id)
+      .populate('categoryId')
+      .populate('subcategoryId')
+      .exec();
   }
 
   async getFilters(): Promise<Filter> {

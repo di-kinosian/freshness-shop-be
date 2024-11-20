@@ -1,8 +1,16 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Query,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { DataForPadination } from 'src/main/constants/api.constants';
 import { Filter, Product } from './product.types';
 import { ProductFiltersDto } from './dto/filters.dto';
+import { ProductDto } from './dto/product.dto';
+import { ErrorMessages } from 'src/main/constants/messages.constants';
 
 @Controller('products')
 export class ProductController {
@@ -27,6 +35,17 @@ export class ProductController {
       filters.limit || 10,
       parsedFilters,
     );
+  }
+
+  @Get(':id')
+  async getProduct(@Param('id') id: ProductDto): Promise<Product> {
+    const product = await this.productService.getProductById(id);
+
+    if (!product) {
+      throw new NotFoundException(ErrorMessages.PRODUCT_WITH_ID_NOT_FOUND);
+    }
+
+    return product;
   }
 
   @Get('filters')
