@@ -1,12 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsOptional,
-  IsNumber,
-  IsArray,
-} from 'class-validator';
+import { IsOptional, IsNumber, IsArray } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 
-export class ProductFiltersDto {
+export class GetFilteredProductsDto {
   // @ApiProperty({ description: 'CategoryId of the product', required: false })
   // @IsOptional()
   // @IsString()
