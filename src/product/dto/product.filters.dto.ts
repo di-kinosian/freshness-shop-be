@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsNumber, IsArray } from 'class-validator';
+import { IsOptional, IsNumber, IsArray, IsString } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
 
 export class GetFilteredProductsDto {
@@ -71,4 +71,22 @@ export class GetFilteredProductsDto {
   @IsNumber()
   @Type(() => Number)
   limit?: number;
+
+  @ApiProperty({
+    description: 'Field to sort by (e.g., "price", "rating")',
+    required: false,
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  sortField?: string;
+
+  @ApiProperty({
+    description: 'Sort direction (e.g., "asc" or "desc")',
+    required: false,
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  sortDirection?: string;
 }
