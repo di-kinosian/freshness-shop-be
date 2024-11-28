@@ -10,8 +10,9 @@ export class ProductService {
 
   async getAllProducts(query: GetFilteredProductsDto) {
     const {
-      page,
-      limit,
+      categoryId,
+      page = 1,
+      limit = 10,
       brands,
       priceMin,
       priceMax,
@@ -22,6 +23,7 @@ export class ProductService {
     const skip = (page - 1) * limit;
 
     const dbQuery: any = {
+      ...(categoryId && { categoryId }),
       ...(brands?.length && { brand: { $in: brands } }),
       ...(priceMin !== undefined || priceMax !== undefined
         ? {
@@ -35,6 +37,7 @@ export class ProductService {
     };
 
     const sort: { [key: string]: SortOrder } = {};
+
     if (sortField && sortDirection) {
       sort[sortField] = sortDirection === 'asc' ? 1 : -1;
     }
@@ -56,8 +59,6 @@ export class ProductService {
   }
 
   async getFilters(): Promise<Filter> {
-    console.log('top');
-
     const brands = await this.productModel.distinct('brand').exec();
     const [price] = await this.productModel.aggregate([
       {
@@ -101,7 +102,6 @@ export class ProductService {
         },
       },
     ]);
-    console.log(categories);
 
     return {
       brands: brands,

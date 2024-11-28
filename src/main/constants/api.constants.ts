@@ -22,6 +22,45 @@ export const UserProperties = {
   },
 };
 
+export const FilteredProductProperties = {
+  categoryId: {
+    description: 'CategoryId of the product',
+    example: 'CategoryId of the product',
+  },
+  brands: {
+    description: 'List of brands',
+    example: '["Sony", "Samsung"]',
+  },
+  priceMin: {
+    description: 'Minimum price for the product',
+    example: 20,
+  },
+  priceMax: {
+    description: 'Maximum price for the product',
+    example: 1200,
+  },
+  rating: {
+    description: 'List of ratings',
+    example: [4, 5],
+  },
+  page: {
+    description: 'Page number for pagination',
+    example: 1,
+  },
+  limit: {
+    description: 'Number of items per page',
+    example: 5,
+  },
+  sortField: {
+    description: 'Field to sort by ',
+    example: 'rating',
+  },
+  sortDirection: {
+    description: 'Sort direction',
+    example: 'asc',
+  },
+};
+
 export const DataForPadination = {
   page: 1,
   limit: 5,

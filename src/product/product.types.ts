@@ -37,7 +37,7 @@ export interface Filter {
 }
 
 export interface SelectedFilters {
-  // category: string;
+  categoryId: string;
   brands: string[];
   price: {
     min: number;

@@ -19,6 +19,7 @@ import { JwtConstants } from 'src/main/constants/api.constants';
   providers: [UserService],
   exports: [UserService],
 })
+
 export class UserModule {
   constructor() {
     console.log(Messages.USERMODULE_INITIALIZED);
