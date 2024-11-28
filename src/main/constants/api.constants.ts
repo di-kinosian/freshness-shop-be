@@ -25,7 +25,7 @@ export const UserProperties = {
 export const FilteredProductProperties = {
   categoryId: {
     description: 'CategoryId of the product',
-    example: 'CategoryId of the product',
+    example: '67362e66cd487232b2f86e4a',
   },
   brands: {
     description: 'List of brands',
