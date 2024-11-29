@@ -4,6 +4,8 @@ import {
   Matches,
   MinLength,
   IsOptional,
+  IsArray,
+  IsMongoId,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserProperties } from 'src/main/constants/api.constants';
@@ -14,7 +16,9 @@ import {
   passwordValidation,
   phoneNumberValidation,
 } from 'src/main/constants/validation.constants';
-import { validationMessages } from 'src/main/constants/messages.constants';
+import {
+  validationMessages,
+} from 'src/main/constants/messages.constants';
 
 export class CreateUserDto {
   @ApiProperty(UserProperties.firstName)
@@ -43,4 +47,12 @@ export class CreateUserDto {
     message: validationMessages.phoneNumberFormat,
   })
   phoneNumber?: string;
+
+  @ApiProperty(UserProperties.wishList)
+  @IsArray()
+  @IsMongoId({
+    each: true,
+    message: validationMessages.withListItemFormat,
+  })
+  wishList: string[];
 }

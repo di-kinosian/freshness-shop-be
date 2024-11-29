@@ -10,11 +10,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { ErrorMessages } from 'src/main/constants/messages.constants';
+import { Product } from 'src/product/product.types';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectModel('Product') private productModel: Model<Product>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -37,6 +39,65 @@ export class UserService {
     await user.save();
 
     return { user };
+  }
+
+  async getProfile(userId: string): Promise<User> {
+    const user = await this.userModel.findById(userId).select('-password');
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  async getWishList(userId: string): Promise<any[]> {
+    const user = await this.userModel.findById(userId, 'wishList');
+
+    if (!user) {
+      throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
+    }
+
+    const productIds = user.wishList;
+
+    if (!productIds || productIds.length === 0) {
+      return [];
+    }
+
+    const products = await this.productModel
+      .find({ _id: { $in: productIds } })
+      .exec();
+
+    return products;
+  }
+
+  async addToWishList(
+    userId: string,
+    productId: string,
+  ): Promise<{ updatedWishList: string[] }> {
+    const user = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $addToSet: { wishList: productId } },
+      { new: true },
+    );
+
+    return {
+      updatedWishList: user.wishList,
+    };
+  }
+
+  async deleteFromWishList(
+    userId: string,
+    productId: string,
+  ): Promise<{ updatedWishList: string[] }> {
+    const user = await this.userModel.findByIdAndUpdate(
+      userId,
+      { $pull: { wishList: productId } },
+      { new: true },
+    );
+
+    return {
+      updatedWishList: user.wishList,
+    };
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -64,9 +125,11 @@ export class UserService {
     refreshToken: string,
   ): Promise<void> {
     const user = await this.userModel.findById(userId);
+
     if (!user) {
       throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
     }
+
     user.refreshToken = refreshToken;
     await user.save();
   }
@@ -77,9 +140,11 @@ export class UserService {
 
   async removeRefreshToken(userId: string): Promise<void> {
     const user = await this.userModel.findById(userId);
+
     if (!user) {
       throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
     }
+  
     user.refreshToken = '';
     await user.save();
   }
