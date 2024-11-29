@@ -5,6 +5,7 @@ import {
   Get,
   UseGuards,
   Request,
+  Patch,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
@@ -54,7 +55,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
-  @Post('wish-list/add')
+  @Patch('wish-list/add')
   @ApiOperation({ summary: SummaryConstants.ADD_PRODUCT_TO_WISH_LIST })
   async addToWishList(
     @Request() req,
@@ -67,7 +68,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
-  @Post('wish-list/remove')
+  @Patch('wish-list/remove')
   @ApiOperation({ summary: SummaryConstants.DELETE_PRODUCT_FROM_WISH_LIST })
   async deleteFromWishList(
     @Request() req,

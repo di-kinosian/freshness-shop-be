@@ -22,7 +22,7 @@ export const UserProperties = {
   },
   wishList: {
     description: 'Wish list (array with productIds)',
-    example: ['673ddaa8120ddad3e0daca5c', '673ddaa8120ddad3e0daca6a'],
+    example: '673ddaa8120ddad3e0dacHEREa5c',
   },
 };
 
@@ -89,8 +89,8 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN_ACCESS: '30m',
-  EXPIRES_IN_REFRESH: '7d',
+  EXPIRES_IN_ACCESS: '2m',
+  EXPIRES_IN_REFRESH: '1d',
 };
 
 export const SummaryConstants = {
