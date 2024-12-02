@@ -9,16 +9,20 @@ export const UserProperties = {
   },
   email: {
     description: 'User email',
-    example: 'john.doe@example.com',
+    example: 'diana.doe@example.com',
   },
   password: {
     description:
       'User password. Must contain at least 2 lowercase, 2 uppercase, 2 digits, and 2 special characters.',
-    example: 'AA12@@bb',
+    example: 'PP12@@bb',
   },
   phoneNumber: {
     description: 'Phone number',
     example: '+1234567893',
+  },
+  wishList: {
+    description: 'Wish list (array with productIds)',
+    example: '673ddaa8120ddad3e0daca5c',
   },
 };
 
@@ -85,10 +89,14 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN_ACCESS: '30m',
-  EXPIRES_IN_REFRESH: '7d',
+  EXPIRES_IN_ACCESS: '2m',
+  EXPIRES_IN_REFRESH: '1d',
 };
 
 export const SummaryConstants = {
   USER_REGISTRATION: 'User registration',
+  DELETE_PRODUCT_FROM_WISH_LIST: 'Remove product from wish list',
+  ADD_PRODUCT_TO_WISH_LIST: 'Add product to wish list',
+  GET_USER_WISH_LIST: 'Get user wish list',
+  GET_USER_PROFILE: 'Get user profile',
 };

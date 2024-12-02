@@ -21,6 +21,9 @@ export class User extends Document<string> {
 
   @Prop({ required: false })
   refreshToken: string;
+
+  @Prop({ type: [String], default: [] })
+  wishList: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

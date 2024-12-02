@@ -45,3 +45,7 @@ export interface SelectedFilters {
   };
   rating: number[];
 }
+
+export interface WishList {
+  wishList: string[];
+}
