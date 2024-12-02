@@ -10,7 +10,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
 import { JwtService } from '@nestjs/jwt';
 import { ErrorMessages } from 'src/main/constants/messages.constants';
-import { Product } from 'src/product/product.types';
+import { Product, WishList } from 'src/product/product.types';
 
 @Injectable()
 export class UserService {
@@ -47,10 +47,11 @@ export class UserService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+
     return user;
   }
 
-  async getWishList(userId: string): Promise<any[]> {
+  async getWishList(userId: string): Promise<Product[]> {
     const user = await this.userModel.findById(userId, 'wishList');
 
     if (!user) {
@@ -73,7 +74,7 @@ export class UserService {
   async addToWishList(
     userId: string,
     productId: string,
-  ): Promise<{ updatedWishList: string[] }> {
+  ): Promise<WishList> {
     const user = await this.userModel.findByIdAndUpdate(
       userId,
       { $addToSet: { wishList: productId } },
@@ -81,14 +82,14 @@ export class UserService {
     );
 
     return {
-      updatedWishList: user.wishList,
+      wishList: user.wishList,
     };
   }
 
   async deleteFromWishList(
     userId: string,
     productId: string,
-  ): Promise<{ updatedWishList: string[] }> {
+  ): Promise<WishList> {
     const user = await this.userModel.findByIdAndUpdate(
       userId,
       { $pull: { wishList: productId } },
@@ -96,7 +97,7 @@ export class UserService {
     );
 
     return {
-      updatedWishList: user.wishList,
+      wishList: user.wishList,
     };
   }
 
@@ -144,7 +145,7 @@ export class UserService {
     if (!user) {
       throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
     }
-  
+
     user.refreshToken = '';
     await user.save();
   }

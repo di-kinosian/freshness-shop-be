@@ -22,7 +22,7 @@ export const UserProperties = {
   },
   wishList: {
     description: 'Wish list (array with productIds)',
-    example: '673ddaa8120ddad3e0dacHEREa5c',
+    example: '673ddaa8120ddad3e0daca5c',
   },
 };
 
