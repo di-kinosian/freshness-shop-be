@@ -63,6 +63,10 @@ export const FilteredProductProperties = {
     description: 'Sort direction',
     example: 'asc',
   },
+  searchValue: {
+    description: 'Value in search',
+    example: 'iPhone',
+  }
 };
 
 export const DataForPadination = {
