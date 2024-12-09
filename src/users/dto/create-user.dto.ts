@@ -16,9 +16,7 @@ import {
   passwordValidation,
   phoneNumberValidation,
 } from 'src/main/constants/validation.constants';
-import {
-  validationMessages,
-} from 'src/main/constants/messages.constants';
+import { validationMessages } from 'src/main/constants/messages.constants';
 
 export class CreateUserDto {
   @ApiProperty(UserProperties.firstName)
