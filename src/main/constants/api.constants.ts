@@ -22,7 +22,7 @@ export const UserProperties = {
   },
   wishList: {
     description: 'Wish list (array with productIds)',
-    example: '673ddaa8120ddad3e0daca5c',
+    example: ['673ddaa8120ddad3e0daca5c'],
   },
 };
 
@@ -63,6 +63,10 @@ export const FilteredProductProperties = {
     description: 'Sort direction',
     example: 'asc',
   },
+  searchValue: {
+    description: 'Value in search',
+    example: 'iPhone',
+  }
 };
 
 export const DataForPadination = {

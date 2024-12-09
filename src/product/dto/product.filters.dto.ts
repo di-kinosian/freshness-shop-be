@@ -94,4 +94,13 @@ export class GetFilteredProductsDto {
   @IsOptional()
   @IsString()
   sortDirection?: string;
+
+  @ApiProperty({
+    description: FilteredProductProperties.searchValue.description,
+    required: false,
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  searchValue?: string;
 }
