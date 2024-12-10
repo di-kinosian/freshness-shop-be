@@ -26,6 +26,7 @@ export const ErrorMessages = {
   REFRESH_TOKEN_IS_INVALID: 'Invalid refresh token',
   CATEGORY_NOT_FOUND: 'Category is not found',
   FAILED_TO_CREATE_SUBCATEGORY: 'Failed to create subcategory',
+  CART_NOT_FOUND: 'Cart not found',
   CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Category with ${id} id not defined`,
   SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>

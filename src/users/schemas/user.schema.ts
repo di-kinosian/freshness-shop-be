@@ -23,7 +23,7 @@ export class User extends Document<string> {
   refreshToken: string;
 
   @Prop({ type: [String], default: [] })
-  wishList: string[];
+  wishList?: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
