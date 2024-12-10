@@ -5,6 +5,7 @@ import { Cart } from './shemas/cart.shema';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { Product } from 'src/product/product.types';
 import { ErrorMessages } from 'src/main/constants/messages.constants';
+import { DeleteFromCartDto } from './dto/delete-from-cart.dto';
 
 @Injectable()
 export class CartService {
@@ -59,6 +60,30 @@ export class CartService {
     } else {
       cart.items.push({ productId, quantity });
     }
+
+    return cart.save();
+  }
+
+  async deleteFromCart(
+    userId: string,
+    DeleteFromCartDto: DeleteFromCartDto,
+  ): Promise<Cart> {
+    const { productId } = DeleteFromCartDto;
+    let cart = await this.cartModel.findOne({ userId });
+
+    if (!cart) {
+      throw new NotFoundException(ErrorMessages.CART_NOT_FOUND);
+    }
+
+    const itemIndex = cart.items.findIndex(
+      (item) => item.productId === productId,
+    );
+
+    if (itemIndex === -1) {
+      throw new NotFoundException(ErrorMessages.PRODUCT_NOT_FOUND_IN_CART);
+    }
+
+    cart.items.splice(itemIndex, 1);
 
     return cart.save();
   }

@@ -16,6 +16,7 @@ export const Messages = {
 };
 
 export const ErrorMessages = {
+  PRODUCT_NOT_FOUND_IN_CART: 'Product not found in cart',
   INVALID_EMAIL: 'Invalid email or password',
   INVALID_PRODUCT_ID_FORMAT: 'Invalid product ID format',
   EMAIL_ALREADY_IN_USE: 'Email already in use',

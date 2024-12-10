@@ -8,12 +8,14 @@ import {
   Request,
   Post,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { SummaryConstants } from 'src/main/constants/api.constants';
+import { DeleteFromCartDto } from './dto/delete-from-cart.dto';
 
 @Controller('cart')
 export class CartController {
@@ -21,8 +23,8 @@ export class CartController {
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
-  @Get('cart')
-  @ApiOperation({ summary: SummaryConstants.GET_CART})
+  @Get()
+  @ApiOperation({ summary: SummaryConstants.GET_CART })
   async getCart(@Request() req) {
     const userId = req.user._id;
 
@@ -40,5 +42,15 @@ export class CartController {
     }
 
     return this.cartService.addToCart(userId, addToCartDto);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-auth')
+  @Delete('item/remove')
+  @ApiOperation({ summary: SummaryConstants.DELETE_PRODUCT_FROM_CART })
+  async deleteFromCart(@Request() req, @Body() DeleteFromCartDto: DeleteFromCartDto) {
+    const userId = req.user._id;
+
+    return this.cartService.deleteFromCart(userId, DeleteFromCartDto);
   }
 }
