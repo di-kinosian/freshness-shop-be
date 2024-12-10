@@ -8,7 +8,7 @@ import {
 import { ProductService } from './product.service';
 import { Filter, Product } from './product.types';
 import { ErrorMessages } from 'src/main/constants/messages.constants';
-import { GetFilteredProductsDto } from './dto/product.filters.dto';
+import { GetFilteredProductsDto } from './dto/product-filters.dto';
 
 @Controller('products')
 export class ProductController {

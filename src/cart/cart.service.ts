@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Cart } from './shemas/cart.shema';
-import { AddToCartDto } from './dto/add-to-cart.dto';
+import { CartItemDto } from './dto/cart-item.dto';
 import { Product } from 'src/product/product.types';
 import { ErrorMessages } from 'src/main/constants/messages.constants';
-import { DeleteFromCartDto } from './dto/delete-from-cart.dto';
+import { DeleteFromCartDto } from './dto/delete-item.dto';
 
 @Injectable()
 export class CartService {
@@ -40,8 +44,8 @@ export class CartService {
     return productsWithQuantities;
   }
 
-  async addToCart(userId: string, addToCartDto: AddToCartDto): Promise<Cart> {
-    const { productId, quantity } = addToCartDto;
+  async addToCart(userId: string, CartItemDto: CartItemDto): Promise<Cart> {
+    const { productId, quantity } = CartItemDto;
     let cart = await this.cartModel.findOne({ userId });
 
     if (!cart) {
@@ -60,6 +64,32 @@ export class CartService {
     } else {
       cart.items.push({ productId, quantity });
     }
+
+    return cart.save();
+  }
+
+  async updateCartItem(
+    userId: string,
+    CartItemDto: CartItemDto,
+  ): Promise<Cart> {
+    const { productId, quantity } = CartItemDto;
+    let cart = await this.cartModel.findOne({ userId });
+
+    if (!cart) {
+      throw new NotFoundException(ErrorMessages.CART_NOT_FOUND);
+    }
+
+    const productItem = cart.items.find((item) => item.productId === productId);
+
+    if (!productItem) {
+      throw new NotFoundException(ErrorMessages.PRODUCT_NOT_FOUND_IN_CART);
+    }
+
+    if (quantity <= 0) {
+      throw new BadRequestException(ErrorMessages.QUANTITY_ERROR);
+    }
+
+    productItem.quantity = quantity;
 
     return cart.save();
   }
