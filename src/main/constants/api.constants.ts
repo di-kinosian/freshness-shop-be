@@ -22,7 +22,7 @@ export const UserProperties = {
   },
   wishList: {
     description: 'Wish list (array with productIds)',
-    example: '673ddaa8120ddad3e0daca5c',
+    example: ['673ddaa8120ddad3e0daca5c'],
   },
 };
 
@@ -66,7 +66,32 @@ export const FilteredProductProperties = {
   searchValue: {
     description: 'Value in search',
     example: 'iPhone',
-  }
+  },
+};
+
+export const CartItemProperties = {
+  productId: {
+    description: 'Product ID to be added to the cart',
+    example: '675302c1823af6cae010ea90',
+  },
+  quantity: {
+    description: 'Quantity of the product',
+    example: 2,
+  },
+};
+
+export const CartProperties = {
+  userId: {
+    description: 'Unique identifier for the user',
+    example: 'user123',
+  },
+  items: {
+    description: 'List of items in the cart',
+    example: [
+      { quantity: 2, productId: 'product123' },
+      { quantity: 1, productId: 'product456' },
+    ],
+  },
 };
 
 export const DataForPadination = {
@@ -93,7 +118,7 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN_ACCESS: '2m',
+  EXPIRES_IN_ACCESS: '10m',
   EXPIRES_IN_REFRESH: '1d',
 };
 
@@ -102,5 +127,9 @@ export const SummaryConstants = {
   DELETE_PRODUCT_FROM_WISH_LIST: 'Remove product from wish list',
   ADD_PRODUCT_TO_WISH_LIST: 'Add product to wish list',
   GET_USER_WISH_LIST: 'Get user wish list',
+  GET_CART: 'Get cart',
+  UPDATE_PRODUCT: 'Update product',
   GET_USER_PROFILE: 'Get user profile',
+  DELETE_PRODUCT_FROM_CART: 'Remove product from cart',
+  ADD_PRODUCT_TO_CART: 'Add product to cart',
 };

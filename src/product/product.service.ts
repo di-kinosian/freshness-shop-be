@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, SortOrder } from 'mongoose';
 import { Filter, Product } from './product.types';
-import { GetFilteredProductsDto } from './dto/product.filters.dto';
+import { GetFilteredProductsDto } from './dto/product-filters.dto';
 
 @Injectable()
 export class ProductService {
