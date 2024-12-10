@@ -29,8 +29,8 @@ export class ProductService {
       ...(priceMin !== undefined || priceMax !== undefined
         ? {
             price: {
-              ...(priceMin !== undefined ? { $gte: priceMin } : {}),
-              ...(priceMax !== undefined ? { $lte: priceMax } : {}),
+              ...(Boolean(priceMin) ? { $gte: priceMin } : {}),
+              ...(Boolean(priceMax) ? { $lte: priceMax } : {}),
             },
           }
         : {}),
