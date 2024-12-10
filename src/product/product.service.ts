@@ -19,21 +19,23 @@ export class ProductService {
       rating,
       sortField,
       sortDirection,
+      searchValue,
     } = query;
     const skip = (page - 1) * limit;
 
     const dbQuery: any = {
-      ...(categoryId && { categoryId }),
-      ...(brands?.length && { brand: { $in: brands } }),
+      ...(categoryId ? { categoryId } : {}),
+      ...(brands?.length ? { brand: { $in: brands } } : {}),
       ...(priceMin !== undefined || priceMax !== undefined
         ? {
             price: {
-              ...(priceMin && { $gte: priceMin }),
-              ...(priceMax && { $lte: priceMax }),
+              ...(Boolean(priceMin) ? { $gte: priceMin } : {}),
+              ...(Boolean(priceMax) ? { $lte: priceMax } : {}),
             },
           }
         : {}),
-      ...(rating?.length && { rating: { $in: rating } }),
+      ...(rating?.length ? { rating: { $in: rating } } : {}),
+      ...(searchValue ? { title: { $regex: searchValue, $options: 'i' } } : {}),
     };
 
     const sort: { [key: string]: SortOrder } = {};
