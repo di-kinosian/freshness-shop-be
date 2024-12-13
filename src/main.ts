@@ -7,7 +7,8 @@ import { ValidationPipe } from '@nestjs/common';
 
 dotenv.config();
 
-const PORT = process.env.PORT || 8080;
+const DEFAULT_PORT = 8080;
+const PORT = process.env.PORT || DEFAULT_PORT;
 const HOST = '0.0.0.0';
 
 async function bootstrap() {
