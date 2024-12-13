@@ -71,10 +71,7 @@ export class UserService {
     return products;
   }
 
-  async addToWishList(
-    userId: string,
-    productId: string,
-  ): Promise<WishList> {
+  async addToWishList(userId: string, productId: string): Promise<WishList> {
     const user = await this.userModel.findByIdAndUpdate(
       userId,
       { $addToSet: { wishList: productId } },
