@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  HttpException,
-  HttpStatus,
   Request,
   Post,
   UseGuards,
@@ -26,23 +24,15 @@ export class CartController {
   @Get()
   @ApiOperation({ summary: SummaryConstants.GET_CART })
   async getCart(@Request() req) {
-    const userId = req.user._id;
-
-    return this.cartService.getCart(userId);
+    return this.cartService.getCart(req.user._id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
   @Post('add')
-  @ApiOperation({ summary: SummaryConstants.ADD_PRODUCT_TO_CART})
+  @ApiOperation({ summary: SummaryConstants.ADD_PRODUCT_TO_CART })
   async addToCart(@Request() req, @Body() CartItemDto: CartItemDto) {
-    const userId = req.user._id;
-
-    if (!userId) {
-      throw new HttpException('User ID is required', HttpStatus.BAD_REQUEST);
-    }
-
-    return this.cartService.addToCart(userId, CartItemDto);
+    return this.cartService.addToCart(req.user._id, CartItemDto);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -50,13 +40,7 @@ export class CartController {
   @Put('item/update')
   @ApiOperation({ summary: SummaryConstants.UPDATE_PRODUCT })
   async updateCartItem(@Request() req, @Body() CartItemDto: CartItemDto) {
-    const userId = req.user._id;
-
-    if (!userId) {
-      throw new HttpException('User ID is required', HttpStatus.BAD_REQUEST);
-    }
-
-    return this.cartService.updateCartItem(userId, CartItemDto);
+    return this.cartService.updateCartItem(req.user._id, CartItemDto);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -67,8 +51,6 @@ export class CartController {
     @Request() req,
     @Body() DeleteFromCartDto: DeleteFromCartDto,
   ) {
-    const userId = req.user._id;
-
-    return this.cartService.deleteFromCart(userId, DeleteFromCartDto);
+    return this.cartService.deleteFromCart(req.user._id, DeleteFromCartDto);
   }
 }
