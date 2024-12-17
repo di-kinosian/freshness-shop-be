@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
 import { ConfigModule } from '@nestjs/config';
+import { CartModule } from './cart/cart.module';
 
 config();
 @Module({
@@ -18,6 +19,7 @@ config();
     MongooseModule.forRoot(process.env.MONGO_DB_URI),
     ProductModule,
     CategoryModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService, ProductModule],
