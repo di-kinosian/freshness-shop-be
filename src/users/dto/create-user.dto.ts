@@ -48,6 +48,7 @@ export class CreateUserDto {
 
   @ApiProperty(UserProperties.wishList)
   @IsArray()
+  @IsOptional()
   @IsMongoId({
     each: true,
     message: validationMessages.withListItemFormat,

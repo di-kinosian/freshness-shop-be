@@ -22,23 +22,15 @@ export class CartController {
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
   @Get('cart')
-  @ApiOperation({ summary: SummaryConstants.GET_CART})
+  @ApiOperation({ summary: SummaryConstants.GET_CART })
   async getCart(@Request() req) {
-    const userId = req.user._id;
-
-    return this.cartService.getCart(userId);
+    return this.cartService.getCart(req.user._id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
   @Post('add')
   async addToCart(@Request() req, @Body() addToCartDto: AddToCartDto) {
-    const userId = req.user._id;
-
-    if (!userId) {
-      throw new HttpException('User ID is required', HttpStatus.BAD_REQUEST);
-    }
-
-    return this.cartService.addToCart(userId, addToCartDto);
+    return this.cartService.addToCart(req.user._id, addToCartDto);
   }
 }
