@@ -94,6 +94,102 @@ export const CartProperties = {
   },
 };
 
+export const CreateOrderProperties = {
+  userId: {
+    description: 'User ID placing the order',
+    example: '6720f8f3f948281007e15644',
+  },
+  status: {
+    description: 'Status of the order',
+  },
+  billingInfo: {
+    description: 'Billing information of the order',
+  },
+  paymentStatus: {
+    description: 'Payment status of the order',
+  },
+  totalAmount: {
+    description: 'Total amount for the order',
+  },
+};
+
+export const BillingProperties = {
+  address: {
+    description: 'Address of the customer',
+    example: '123 Main St',
+  },
+  country: { description: 'Country of the customer', example: 'USA' },
+  city: { description: 'City of the customer', example: 'New York' },
+  zipCode: { description: 'Zip code of the customer', example: '10001' },
+  notes: {
+    description: 'Optional notes for the order',
+    example: 'Leave at the front door',
+    required: false,
+  },
+  agreeToPolicy: {
+    description: 'Agreement to policy',
+    example: true,
+    required: false,
+  },
+  agreeToEmails: {
+    description: 'Agreement to receive emails',
+    example: false,
+    required: false,
+  },
+};
+
+export const ProductProperties = {
+  _id: { description: 'Product ID', example: '609e1234567890abcdef1234' },
+  title: {
+    description: 'Title of the product',
+    example: 'Wireless Mouse',
+  },
+  description: {
+    description: 'Description of the product',
+    example: 'A high-quality wireless mouse',
+  },
+  rating: {
+    description: 'Rating of the product',
+    example: 4.5,
+    required: false,
+  },
+  price: { description: 'Price of the product', example: 29.99 },
+  quantity: { description: 'Quantity available in stock', example: 100 },
+  brand: { description: 'Brand of the product', example: 'Logitech' },
+
+  country: { description: 'Country of origin', example: 'USA' },
+  images: {
+    description: 'Images of the product',
+    example: ['image1.jpg', 'image2.jpg'],
+  },
+  discount: {
+    description: 'Discount on the product',
+    example: 10,
+    required: false,
+  },
+  categoryId: {
+    description: 'Category ID of the product',
+    example: 'category123',
+  },
+  subcategoryId: {
+    description: 'Subcategory ID of the product',
+    example: 'subcategory123',
+  },
+  additionalInformation: {
+    description: 'Additional information',
+    example: [{ country: 'Ukraine' }],
+  },
+};
+
+export const OrderProductProperties = {
+  product: { description: 'Product details' },
+  quantity: {
+    description: 'Quantity of the product',
+    example: 2,
+    minimum: 1,
+  },
+};
+
 export const DataForPadination = {
   page: 1,
   limit: 5,
@@ -132,4 +228,5 @@ export const SummaryConstants = {
   GET_USER_PROFILE: 'Get user profile',
   DELETE_PRODUCT_FROM_CART: 'Remove product from cart',
   ADD_PRODUCT_TO_CART: 'Add product to cart',
+  ADD_ORDER: 'Add order',
 };
