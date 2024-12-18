@@ -7,7 +7,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { CartProperties } from 'src/main/constants/api.constants';
-import { AddToCartDto } from './add-to-cart.dto';
+import { CartItemDto } from './cart-item.dto';
 
 export class CreateCartDto {
   @ApiProperty(CartProperties.userId)
@@ -17,11 +17,11 @@ export class CreateCartDto {
 
   @ApiProperty({
     description: CartProperties.items.description,
-    type: [AddToCartDto],
+    type: [CartItemDto],
     example: CartProperties.items.example,
   })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => AddToCartDto)
-  items: AddToCartDto[];
+  @Type(() => CartItemDto)
+  items: CartItemDto[];
 }

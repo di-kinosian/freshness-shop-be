@@ -2,7 +2,7 @@ import { IsString, IsNotEmpty, IsNumber, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { CartItemProperties } from 'src/main/constants/api.constants';
 
-export class AddToCartDto {
+export class CartItemDto {
   @ApiProperty({
     description: CartItemProperties.productId.description,
     example: CartItemProperties.productId.example,

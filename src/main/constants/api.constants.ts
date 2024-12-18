@@ -128,5 +128,8 @@ export const SummaryConstants = {
   ADD_PRODUCT_TO_WISH_LIST: 'Add product to wish list',
   GET_USER_WISH_LIST: 'Get user wish list',
   GET_CART: 'Get cart',
+  UPDATE_PRODUCT: 'Update product',
   GET_USER_PROFILE: 'Get user profile',
+  DELETE_PRODUCT_FROM_CART: 'Remove product from cart',
+  ADD_PRODUCT_TO_CART: 'Add product to cart',
 };

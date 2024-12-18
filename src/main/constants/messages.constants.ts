@@ -16,6 +16,7 @@ export const Messages = {
 };
 
 export const ErrorMessages = {
+  PRODUCT_NOT_FOUND_IN_CART: 'Product not found in cart',
   INVALID_EMAIL: 'Invalid email or password',
   INVALID_PRODUCT_ID_FORMAT: 'Invalid product ID format',
   EMAIL_ALREADY_IN_USE: 'Email already in use',
@@ -26,6 +27,7 @@ export const ErrorMessages = {
   REFRESH_TOKEN_IS_INVALID: 'Invalid refresh token',
   CATEGORY_NOT_FOUND: 'Category is not found',
   FAILED_TO_CREATE_SUBCATEGORY: 'Failed to create subcategory',
+  QUANTITY_ERROR: 'Quantity must be greater than 0',
   CART_NOT_FOUND: 'Cart not found',
   CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Category with ${id} id not defined`,
