@@ -21,7 +21,6 @@ export class CreateOrderDto {
   @IsNotEmpty()
   @IsOptional()
   userId: string;
-
   @ApiProperty({
     description: CreateOrderProperties.status.description,
     example: OrderStatus.PENDING,
@@ -29,12 +28,10 @@ export class CreateOrderDto {
   })
   @IsEnum(OrderStatus)
   status: OrderStatus;
-
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => OrderProductDto)
   products: OrderProductDto[];
-
   @ApiProperty({
     description: CreateOrderProperties.billingInfo.description,
     type: BillingDataDto,
@@ -42,7 +39,6 @@ export class CreateOrderDto {
   @ValidateNested()
   @Type(() => BillingDataDto)
   billingInfo: BillingDataDto;
-
   @ApiProperty({
     description: CreateOrderProperties.paymentStatus.description,
     example: PaymentStatus.UNPAID,
@@ -50,7 +46,6 @@ export class CreateOrderDto {
   })
   @IsEnum(PaymentStatus)
   paymentStatus: PaymentStatus;
-
   @ApiProperty({
     description: CreateOrderProperties.totalAmount.description,
     example: 299.99,
