@@ -12,6 +12,7 @@ export const Messages = {
   SHOULD_RETURN_HELLO_WORLD: 'should return "Hello World!',
   TOKEN_IS_EXPIRED: 'Token is expired',
   LOGOUT_SUCCESSFULLY: 'Logged out successfully',
+  ORDER_MUST_HAVE_PRODUCT: 'Order must contain at least one product',
   DELETED_SUCCESSFULLY: (item: string) => `${item} was deleted successfuly`,
 };
 
