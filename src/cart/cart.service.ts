@@ -122,8 +122,4 @@ export class CartService {
 
     return cart.save();
   }
-
-  // async deleteCart(userId: string): Promise<void> {
-  //   await this.cartModel.updateOne({ userId }, { $unset: { items: [] } });
-  // }
 }

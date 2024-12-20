@@ -50,8 +50,8 @@ export class Order {
   @Prop({ default: Date.now })
   updatedAt: Date;
 
-  // @Prop({ required: false })
-  // checkoutId: string;
+  @Prop({ required: false })
+  checkoutId: string;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
