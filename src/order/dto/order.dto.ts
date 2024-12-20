@@ -5,15 +5,15 @@ import {
   IsNumber,
   Min,
   IsEnum,
-  ValidateNested,
   IsArray,
   IsOptional,
+  ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
 import { OrderStatus, PaymentStatus } from '../types';
 import { OrderProductDto } from 'src/product/dto/order-product.dto';
 import { BillingDataDto } from './billing-info.dto';
 import { CreateOrderProperties } from 'src/main/constants/api.constants';
+import { Type } from 'class-transformer';
 
 export class CreateOrderDto {
   @ApiProperty(CreateOrderProperties.userId)
@@ -53,4 +53,13 @@ export class CreateOrderDto {
   @IsNumber()
   @Min(0)
   totalAmount: number;
+}
+
+export class ConfirmOrderDto {
+  @ApiProperty({
+    description: 'Id that is formed by stripe',
+    example: '',
+  })
+  @IsString()
+  sessionId: string;
 }
