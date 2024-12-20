@@ -1,3 +1,5 @@
+import { ProductSchema } from 'src/product/shemas/product.shema';
+
 export const UserProperties = {
   firstName: {
     description: 'First name',
@@ -190,6 +192,13 @@ export const OrderProductProperties = {
   },
 };
 
+export const CreateCheckoutSessionProperties = {
+  products: {
+    description: 'Array of items to be purchased',
+    example: [{ product: ProductSchema, quantity: 1 }],
+  },
+};
+
 export const DataForPadination = {
   page: 1,
   limit: 5,
@@ -229,4 +238,5 @@ export const SummaryConstants = {
   DELETE_PRODUCT_FROM_CART: 'Remove product from cart',
   ADD_PRODUCT_TO_CART: 'Add product to cart',
   ADD_ORDER: 'Add order',
+  ORDER_CONFIRM: 'Order confirm',
 };

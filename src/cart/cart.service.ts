@@ -21,10 +21,15 @@ export class CartService {
   async getCart(
     userId: string,
   ): Promise<{ product: Product; quantity: number }[]> {
-    const cart = await this.cartModel.findOne({ userId });
+    let cart = await this.cartModel.findOne({ userId });
 
     if (!cart) {
-      throw new NotFoundException(ErrorMessages.CART_NOT_FOUND);
+      cart = new this.cartModel({
+        userId,
+        items: [],
+      });
+      await cart.save();
+      return [];
     }
 
     const productsWithQuantities = await Promise.all(
