@@ -10,6 +10,7 @@ import { CategoryModule } from './category/category.module';
 import { ConfigModule } from '@nestjs/config';
 import { CartModule } from './cart/cart.module';
 import { OrderModule } from './order/order.module';
+import { LocationModule } from './location/location.module';
 
 config();
 @Module({
@@ -22,6 +23,7 @@ config();
     CategoryModule,
     CartModule,
     OrderModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService, ProductModule],
