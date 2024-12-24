@@ -30,6 +30,7 @@ export const ErrorMessages = {
   FAILED_TO_CREATE_SUBCATEGORY: 'Failed to create subcategory',
   QUANTITY_ERROR: 'Quantity must be greater than 0',
   CART_NOT_FOUND: 'Cart not found',
+  ORDER_NOT_FOUND: 'Order not found',
   CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Category with ${id} id not defined`,
   SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>

@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateOrderDto } from './dto/order.dto';
 import { OrderDocument } from './shemas/order.shema';
-import { Messages } from 'src/main/constants/messages.constants';
-import { OrderStatus } from './types';
+import { ErrorMessages, Messages } from 'src/main/constants/messages.constants';
+import { Order, OrderStatus, PaymentStatus } from './types';
 import Stripe from 'stripe';
 import { Cart } from 'src/cart/shemas/cart.shema';
 
@@ -20,7 +20,10 @@ export class OrderService {
     });
   }
 
-  async createOrder(userId: string, CreateOrderDto: CreateOrderDto) {
+  async createOrder(
+    userId: string,
+    CreateOrderDto: CreateOrderDto,
+  ): Promise<{ url: string; order: Order }> {
     const { status, products, billingInfo, paymentStatus, totalAmount } =
       CreateOrderDto;
 
@@ -69,15 +72,21 @@ export class OrderService {
     };
   }
 
-  async confirmOrder(userId: string, sessionId: string) {
+  async confirmOrder(userId: string, sessionId: string): Promise<Order> {
     let order = await this.orderModel.findOne({
       userId,
       checkoutId: sessionId,
     });
 
+    if (!order) {
+      throw new Error(ErrorMessages.ORDER_NOT_FOUND);
+    }
+
     if (order) {
       await this.cartModel.updateOne({ userId }, { $unset: { items: [] } });
       order.status = OrderStatus.COMPLETED;
+      order.paymentStatus = PaymentStatus.PAID;
+
       return await order.save();
     }
   }
