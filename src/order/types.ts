@@ -1,3 +1,5 @@
+import { Product } from 'src/product/product.types';
+
 export enum OrderStatus {
   PENDING = 'pending',
   PROCESSING = 'processing',
@@ -25,4 +27,19 @@ export type BillingData = {
   notes?: string;
   agreeToPolicy?: boolean;
   agreeToEmails?: boolean;
+};
+
+export type Cart = {
+  product: Product;
+  quantity: number;
+};
+
+export type Order = {
+  userId: string;
+  status: OrderStatus;
+  products: Cart[];
+  billingInfo: BillingData;
+  paymentStatus: PaymentStatus;
+  totalAmount: number;
+  checkoutId?: string;
 };

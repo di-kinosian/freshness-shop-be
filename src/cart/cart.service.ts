@@ -29,6 +29,7 @@ export class CartService {
         items: [],
       });
       await cart.save();
+
       return [];
     }
 

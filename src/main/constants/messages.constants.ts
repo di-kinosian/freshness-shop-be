@@ -32,6 +32,7 @@ export const ErrorMessages = {
   CART_NOT_FOUND: 'Cart not found',
   FAILED_FETCH_COUNTRIES: 'Failed to fetch countries',
   FAILED_FETCH_CITIES: 'Failed to fetch cities',
+  ORDER_NOT_FOUND: 'Order not found',
   CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Category with ${id} id not defined`,
   SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
