@@ -39,12 +39,12 @@ export class CommentController {
   update(
     @Param('id') id: string,
     @Request() req,
-    @Body() UpdateCommentDto: UpdateCommentDto,
+    @Body() updateCommentDto: UpdateCommentDto,
   ) {
     return this.commentService.updateComment(
       id,
       req.user._id,
-      UpdateCommentDto,
+      updateCommentDto,
     );
   }
 

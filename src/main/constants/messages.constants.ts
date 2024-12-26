@@ -14,6 +14,9 @@ export const Messages = {
   LOGOUT_SUCCESSFULLY: 'Logged out successfully',
   ORDER_MUST_HAVE_PRODUCT: 'Order must contain at least one product',
   DELETED_SUCCESSFULLY: (item: string) => `${item} was deleted successfuly`,
+  NOT_FOUND_PERMISSION: (str: string) =>
+    `You do not have permission to ${str} this comment.`,
+  COMMENT_DELETED: 'Comment deleted successfully',
 };
 
 export const ErrorMessages = {
@@ -32,7 +35,9 @@ export const ErrorMessages = {
   CART_NOT_FOUND: 'Cart not found',
   FAILED_FETCH_COUNTRIES: 'Failed to fetch countries',
   FAILED_FETCH_CITIES: 'Failed to fetch cities',
+  COMMENT_NOT_FOUND: 'Comment not found',
   ORDER_NOT_FOUND: 'Order not found',
+  FAILED_TO_DELETE: 'Failed to delete the comment.',
   CATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
     `Category with ${id} id not defined`,
   SUBCATEGORY_WITH_ID_NOT_FOUND: (id: string) =>
