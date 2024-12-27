@@ -10,9 +10,6 @@ export class CreateCommentDto {
   @ApiProperty(CommentProperties.productId)
   @IsString()
   readonly productId: string;
-  @ApiProperty(CommentProperties.userId)
-  @IsString()
-  readonly userId: string;
   @ApiProperty(CommentProperties.text)
   @IsString()
   readonly text: string;

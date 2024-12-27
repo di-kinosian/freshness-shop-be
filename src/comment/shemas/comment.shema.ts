@@ -6,7 +6,7 @@ export class Comment extends Document {
   @Prop({ required: true })
   productId: string;
 
-  @Prop({ required: true })
+  @Prop({ required: false })
   userId: string;
 
   @Prop({ required: true })

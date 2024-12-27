@@ -22,8 +22,8 @@ export class CommentController {
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth('JWT-auth')
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.createComment(createCommentDto);
+  create(@Body() createCommentDto: CreateCommentDto, @Request() req) {
+    return this.commentService.createComment(createCommentDto, req.user._id);
   }
 
   @UseGuards(AuthGuard('jwt'))

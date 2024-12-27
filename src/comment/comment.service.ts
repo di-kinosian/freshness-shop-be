@@ -8,6 +8,7 @@ import { Model } from 'mongoose';
 import { CreateCommentDto, UpdateCommentDto } from './dto/comment.dto';
 import { Comment } from './shemas/comment.shema';
 import { ErrorMessages, Messages } from 'src/main/constants/messages.constants';
+import { CommentWithReplies } from './types';
 
 @Injectable()
 export class CommentService {
@@ -15,15 +16,41 @@ export class CommentService {
     @InjectModel(Comment.name) private readonly commentModel: Model<Comment>,
   ) {}
 
-  async createComment(createCommentDto: CreateCommentDto): Promise<Comment> {
-    return new this.commentModel(createCommentDto).save();
+  async createComment(
+    createCommentDto: CreateCommentDto,
+    userId: string,
+  ): Promise<Comment> {
+    return new this.commentModel({
+      ...createCommentDto,
+      userId: userId,
+    }).save();
   }
 
-  async getComments(productId: string): Promise<Comment[]> {
-    return this.commentModel
+  async getComments(productId: string): Promise<CommentWithReplies[]> {
+    const comments = await this.commentModel
       .find({ productId })
       .sort({ createdDate: -1 })
+      .lean()
       .exec();
+
+    const repliesGroups: Record<string, Comment[]> = comments.reduce(
+      (acc, item) => {
+        if (!item.parentId) return acc;
+        if (!acc[item.parentId]) acc[item.parentId] = [];
+        acc[item.parentId].push(item);
+        return acc;
+      },
+      {},
+    );
+
+    const result = comments
+      .filter((comment) => !comment.parentId)
+      .map((comment) => ({
+        ...comment,
+        replies: repliesGroups[comment._id.toString()] || [],
+      }));
+
+    return result as CommentWithReplies[];
   }
 
   async updateComment(

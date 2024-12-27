@@ -278,7 +278,7 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN_ACCESS: '10m',
+  EXPIRES_IN_ACCESS: '1d',
   EXPIRES_IN_REFRESH: '1d',
 };
 
