@@ -183,6 +183,61 @@ export const ProductProperties = {
   },
 };
 
+export const CommentProperties = {
+  productId: {
+    description: 'ID of the product the comment belongs to',
+    example: '6752e459fed1d526d1d877bf',
+  },
+  userId: {
+    description: 'ID of the user creating the comment',
+    example: '6720f8f3f948281007e15644',
+  },
+  text: {
+    description: 'The content of the comment',
+    example: 'This is a great product!',
+  },
+  parentId: {
+    description: 'Optional parent comment ID',
+    example: '64c2f53bd9b9c2b7998a9012',
+    required: false,
+  },
+};
+
+export const UpdateCommentProperties = {
+  text: {
+    description: 'Updated text of the comment',
+    example: 'I updated my comment.',
+  },
+};
+
+export const CommentResponseProperties = {
+  id: {
+    description: 'Comment ID',
+    example: '64c2f53bd9b9c2b7998a1234',
+  },
+  productId: {
+    description: 'ID of the product the comment belongs to',
+    example: '64c2f53bd9b9c2b7998a5678',
+  },
+  userId: {
+    description: 'ID of the user who created the comment',
+    example: '64c2f53bd9b9c2b7998a9012',
+  },
+  text: {
+    description: 'The content of the comment',
+    example: 'This is a great product!',
+  },
+  parentId: {
+    description: 'Optional parent comment ID',
+    example: '64c2f53bd9b9c2b7998a3456',
+    nullable: true,
+  },
+  isUpdated: {
+    description: 'Indicates if the comment has been updated',
+    example: true,
+  },
+};
+
 export const OrderProductProperties = {
   product: { description: 'Product details' },
   quantity: {
@@ -223,7 +278,7 @@ export const ApiResponses = {
 };
 
 export const JwtConstants = {
-  EXPIRES_IN_ACCESS: '10m',
+  EXPIRES_IN_ACCESS: '1d',
   EXPIRES_IN_REFRESH: '1d',
 };
 
