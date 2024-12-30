@@ -9,11 +9,13 @@ import { CreateCommentDto, UpdateCommentDto } from './dto/comment.dto';
 import { Comment } from './shemas/comment.shema';
 import { ErrorMessages, Messages } from 'src/main/constants/messages.constants';
 import { CommentWithReplies } from './types';
+import { User, UserDocument } from 'src/users/schemas/user.schema';
 
 @Injectable()
 export class CommentService {
   constructor(
     @InjectModel(Comment.name) private readonly commentModel: Model<Comment>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
   async createComment(
@@ -26,24 +28,59 @@ export class CommentService {
     }).save();
   }
 
+  async getUserMap(userIds: string[]): Promise<Record<string, any>> {
+    const users = await this.userModel
+      .find({ _id: { $in: userIds } })
+      .lean()
+      .exec();
+
+    const userMap = users.reduce(
+      (acc, user) => {
+        acc[user._id.toString()] = {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+        };
+
+        return acc;
+      },
+      {} as Record<string, any>,
+    );
+
+    return userMap;
+  }
+
   async getComments(productId: string): Promise<CommentWithReplies[]> {
     const comments = await this.commentModel
       .find({ productId })
       .sort({ createdDate: -1 })
       .lean()
       .exec();
+    const userIds = Array.from(
+      new Set(comments.map((comment) => comment.userId)),
+    );
 
-    const repliesGroups: Record<string, Comment[]> = comments.reduce(
+    const userMap = await this.getUserMap(userIds);
+
+    const commentsWithUser = comments.map((comment) => ({
+      ...comment,
+      user: userMap[comment.userId] || null,
+    }));
+
+    const repliesGroups: Record<string, Comment[]> = commentsWithUser.reduce(
       (acc, item) => {
         if (!item.parentId) return acc;
         if (!acc[item.parentId]) acc[item.parentId] = [];
         acc[item.parentId].push(item);
+
         return acc;
       },
       {},
     );
 
-    const result = comments
+    const result = commentsWithUser
       .filter((comment) => !comment.parentId)
       .map((comment) => ({
         ...comment,

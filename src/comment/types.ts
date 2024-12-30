@@ -1,3 +1,4 @@
-import { Comment } from "./shemas/comment.shema";
+import { User } from 'src/users/types';
+import { Comment } from './shemas/comment.shema';
 
-export type CommentWithReplies = Comment & {replies?: Comment[]};
+export type CommentWithReplies = Comment & { replies?: Comment[]; user: User };
