@@ -81,7 +81,7 @@ export class OrderService {
   }
 
   async confirmOrder(userId: string, sessionId: string): Promise<Order> {
-    let order = await this.orderModel.findOne({
+    const order = await this.orderModel.findOne({
       userId,
       checkoutId: sessionId,
     });
