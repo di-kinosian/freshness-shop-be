@@ -294,4 +294,5 @@ export const SummaryConstants = {
   ADD_PRODUCT_TO_CART: 'Add product to cart',
   ADD_ORDER: 'Add order',
   ORDER_CONFIRM: 'Order confirm',
+  ORDER_LIST: 'Order list',
 };

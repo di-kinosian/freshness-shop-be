@@ -20,6 +20,14 @@ export class OrderService {
     });
   }
 
+  async getOrderList(userId: string): Promise<Order[]> {
+    let orders = await this.orderModel.find({
+      userId,
+    });
+
+    return orders;
+  }
+
   async createOrder(
     userId: string,
     CreateOrderDto: CreateOrderDto,
@@ -73,7 +81,7 @@ export class OrderService {
   }
 
   async confirmOrder(userId: string, sessionId: string): Promise<Order> {
-    let order = await this.orderModel.findOne({
+    const order = await this.orderModel.findOne({
       userId,
       checkoutId: sessionId,
     });

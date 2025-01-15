@@ -1,4 +1,11 @@
-import { Controller, Post, UseGuards, Request, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Request,
+  Body,
+  Get,
+} from '@nestjs/common';
 import { OrderService } from './order.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
@@ -26,5 +33,13 @@ export class OrderController {
       req.user._id,
       ConfirmOrderDto.sessionId,
     );
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth('JWT-auth')
+  @Get('list')
+  @ApiOperation({ summary: SummaryConstants.ORDER_LIST })
+  async getOrderList(@Request() req) {
+    return this.OrderService.getOrderList(req.user._id);
   }
 }
